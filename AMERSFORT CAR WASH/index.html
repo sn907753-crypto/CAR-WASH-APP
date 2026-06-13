@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>AMERSFORT CAR WASH</title>
+    <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+    <div class='container'>
+        <h1>AMERSFORT CAR WASH</h1>
+        <div id='messageBanner' class='banner hidden'></div>
+
+        <section id='loginSection'>
+            <div class='role-selection'>
+                <button type='button' class='roleBtn' data-role='customer'>Customer Login</button>
+                <button type='button' class='roleBtn' data-role='admin'>Admin Login</button>
+                <button type='button' class='roleBtn' data-role='worker'>Worker Login</button>
+            </div>
+
+            <div id='customerLogin' class='login-panel hidden'>
+                <h2>Customer Login</h2>
+                <label for='customerNameLogin'>Name</label>
+                <input type='text' id='customerNameLogin' placeholder='Enter your name'>
+                <label for='customerIdLogin'>ID Number</label>
+                <input type='text' id='customerIdLogin' placeholder='Enter your ID number'>
+                <button type='button' id='customerLoginBtn'>Login</button>
+                <div id='customerLoginMessage' class='inline-message'></div>
+            </div>
+
+            <div id='adminLogin' class='login-panel hidden'>
+                <h2>Admin Login</h2>
+                <label for='adminUser'>Username</label>
+                <input type='text' id='adminUser' placeholder='Admin username'>
+                <label for='adminPass'>Password</label>
+                <input type='password' id='adminPass' placeholder='Admin password'>
+                <button type='button' id='adminLoginBtn'>Login</button>
+                <div id='adminLoginMessage' class='inline-message'></div>
+            </div>
+
+            <div id='workerLogin' class='login-panel hidden'>
+                <h2>Worker Login</h2>
+                <label for='workerIdLogin'>Worker ID</label>
+                <input type='text' id='workerIdLogin' placeholder='Enter worker ID'>
+                <label for='workerPass'>Password</label>
+                <input type='password' id='workerPass' placeholder='Enter password'>
+                <button type='button' id='workerLoginBtn'>Login</button>
+                <div id='workerLoginMessage' class='inline-message'></div>
+            </div>
+        </section>
+
+        <section id='customerSection' class='hidden'>
+            <div class='dashboard-header'>
+                <div>
+                    <h2>Customer Dashboard</h2>
+                    <p id='customerWelcome'></p>
+                </div>
+                <button class='logoutBtn'>Logout</button>
+            </div>
+
+            <div class='panel'>
+                <h3>Current pricing</h3>
+                <div id='priceSummary' class='data-box'></div>
+                <p><strong>Specials:</strong> <span id='specialSummary'></span></p>
+                <p><strong>Events:</strong> <span id='eventSummary'></span></p>
+            </div>
+
+            <div class='panel'>
+                <h3>Working days & hours</h3>
+                <p id='workDays'></p>
+                <p id='workHours'></p>
+            </div>
+
+            <div class='panel'>
+                <h3>Payment guidelines</h3>
+                <p>Bookings are reserved, but payment must be confirmed before your wash is completed. Admin or cashier will verify real payment and update the status.</p>
+            </div>
+
+            <form id='customerBookingForm' class='panel'>
+                <h3>Book a wash</h3>
+                <label>Name</label>
+                <input readonly id='customerBookingName'>
+                <label>ID Number</label>
+                <input readonly id='customerBookingId'>
+                <label for='customerVehicleType'>Vehicle Type</label>
+                <select id='customerVehicleType'>
+                    <option value='private'>Private</option>
+                    <option value='bakkie'>Bakkie</option>
+                    <option value='quantum'>Quantum</option>
+                    <option value='bus'>Bus</option>
+                </select>
+                <label for='customerPaymentMethod'>Payment Option</label>
+                <select id='customerPaymentMethod'>
+                    <option value='online'>Online</option>
+                    <option value='cash'>Cash</option>
+                    <option value='swipe'>Swipe on Car Wash</option>
+                </select>
+                <label for='customerPaymentId'>Confirm your ID</label>
+                <input id='customerPaymentId' readonly>
+                <button type='submit'>Reserve booking</button>
+                <p class='help-text'>Payment will remain pending until it is verified by staff.</p>
+            </form>
+
+            <div class='panel'>
+                <h3>Online payment details</h3>
+                <div id='bankDetails'>Bank details will appear here once the admin links them.</div>
+            </div>
+
+            <div class='panel'>
+                <h3>Booking status</h3>
+                <div id='bookingStatusList'></div>
+            </div>
+
+            <div class='panel'>
+                <h3>Notifications</h3>
+                <div id='customerNotifications'></div>
+            </div>
+        </section>
+
+        <section id='adminSection' class='hidden'>
+            <div class='dashboard-header'>
+                <div>
+                    <h2>Admin Dashboard</h2>
+                    <p id='adminGreeting'></p>
+                </div>
+                <button class='logoutBtn'>Logout</button>
+            </div>
+
+            <div class='panel'>
+                <h3>Current pricing</h3>
+                <div id='priceSummary' class='data-box'></div>
+                <p><strong>Specials:</strong> <span id='specialSummary'></span></p>
+                <p><strong>Events:</strong> <span id='eventSummary'></span></p>
+            </div>
+
+            <form id='adminPricesForm' class='panel admin-form'>
+                <h3>Update prices</h3>
+                <label>Private</label><input id='pricePrivate' type='number' min='0'>
+                <label>Bakkie</label><input id='priceBakkie' type='number' min='0'>
+                <label>Quantum</label><input id='priceQuantum' type='number' min='0'>
+                <label>Bus</label><input id='priceBus' type='number' min='0'>
+                <button type='submit'>Save Prices</button>
+            </form>
+
+            <form id='adminSpecialForm' class='panel admin-form'>
+                <h3>Update specials</h3>
+                <textarea id='specialText' rows='3'></textarea>
+                <button type='submit'>Save Specials</button>
+            </form>
+
+            <form id='adminEventsForm' class='panel admin-form'>
+                <h3>Update special events</h3>
+                <textarea id='eventText' rows='3'></textarea>
+                <button type='submit'>Save Events</button>
+            </form>
+
+            <form id='adminBankForm' class='panel admin-form'>
+                <h3>Link online payment bank details</h3>
+                <label for='bankName'>Bank Name</label>
+                <input id='bankName' type='text' placeholder='e.g. First National Bank'>
+                <label for='bankAccountNumber'>Account Number</label>
+                <input id='bankAccountNumber' type='text' placeholder='1234567890'>
+                <label for='bankBranchCode'>Branch Code</label>
+                <input id='bankBranchCode' type='text' placeholder='123456'>
+                <label for='bankAccountHolder'>Account Holder</label>
+                <input id='bankAccountHolder' type='text' placeholder='Your business name'>
+                <button type='submit'>Save Bank Details</button>
+            </form>
+
+            <div class='panel'>
+                <h3>Payments</h3>
+                <div id='adminPaymentsList'></div>
+            </div>
+
+            <div class='panel'>
+                <h3>Recent activity</h3>
+                <div id='adminLogList'></div>
+            </div>
+
+            <div class='panel'>
+                <h3>Notifications</h3>
+                <div id='adminNotifications'></div>
+            </div>
+        </section>
+
+        <section id='workerSection' class='hidden'>
+            <div class='dashboard-header'>
+                <div>
+                    <h2>Worker Dashboard</h2>
+                    <p id='workerGreeting'></p>
+                </div>
+                <button class='logoutBtn'>Logout</button>
+            </div>
+
+            <div class='panel'>
+                <h3>Ongoing wash tasks</h3>
+                <div id='workerTasks'></div>
+            </div>
+
+            <form id='workerReportForm' class='panel'>
+                <h3>Upload results & reports</h3>
+                <p>Select status and add notes for each active task, then submit.</p>
+                <button type='submit'>Save Reports</button>
+            </form>
+
+            <div class='panel'>
+                <h3>Notifications</h3>
+                <div id='workerNotifications'></div>
+            </div>
+        </section>
+    </div>
+
+    <script src='script.js'></script>
+</body>
+</html>
